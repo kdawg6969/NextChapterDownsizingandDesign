@@ -20,7 +20,6 @@
       --charcoal-light: #5A5A5A;
       --gold: #C4A35A;
       --gold-light: #E8D9A8;
-      --dusty-blue: #8FA8B7;
       --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
       --font-body: 'DM Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
     }
@@ -32,15 +31,8 @@
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
     /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-d1 { transition-delay: 0.08s; }
     .reveal-d2 { transition-delay: 0.15s; }
     .reveal-d3 { transition-delay: 0.24s; }
@@ -81,21 +73,26 @@
     }
     .btn-outline:hover { background: var(--sage); color: white; }
 
-    /* Photo */
+    /* Placeholder image block */
+    .img-placeholder {
+      background: linear-gradient(145deg, var(--sage-pale), var(--cream-dark));
+      border: 2px dashed var(--sage-light);
+      border-radius: 6px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .img-placeholder .ph-icon { font-size: 28px; opacity: 0.45; margin-bottom: 6px; }
+    .img-placeholder .ph-label {
+      font-size: 11px; font-weight: 600; color: var(--sage); letter-spacing: 0.5px;
+      text-transform: uppercase; text-align: center; padding: 0 8px;
+    }
+
+    /* Real photo */
     .photo-wrap { overflow: hidden; border-radius: 4px; background: var(--sage-pale); position: relative; }
-    .photo-wrap img { transition: transform 0.6s ease; }
-    .photo-wrap:hover img { transform: scale(1.05); }
 
     /* ─── NAVIGATION ─── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      transition: all 0.4s ease; padding: 0 24px;
-    }
-    .nav.scrolled {
-      background: rgba(250,247,242,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e8e4de;
-    }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: all 0.4s ease; padding: 0 24px; }
+    .nav.scrolled { background: rgba(250,247,242,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #e8e4de; }
     .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 72px; }
     .nav-logo { cursor: pointer; text-decoration: none; }
     .nav-logo-title { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--charcoal); line-height: 1.1; }
@@ -125,22 +122,9 @@
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; width: 100%; }
     .hero-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .hero-photos-right { display: flex; flex-direction: column; gap: 12px; }
-    .hero-photo-tall { aspect-ratio: 3/4; border-radius: 8px; }
-    .hero-photo-sq { aspect-ratio: 1/1; border-radius: 8px; }
 
     /* ─── ABOUT ─── */
     .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: center; }
-    .jordan-placeholder {
-      aspect-ratio: 3/4; border-radius: 8px; overflow: hidden; position: relative;
-      background: linear-gradient(145deg, var(--sage-pale), var(--cream-dark));
-      border: 3px dashed var(--sage-light);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-    }
-    .jordan-monogram {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
-      font-family: var(--font-heading); font-size: 160px; font-weight: 700;
-      color: rgba(139,158,124,0.03); line-height: 1; user-select: none;
-    }
     .jordan-card {
       position: absolute; bottom: -24px; left: 20px; right: 20px;
       background: white; border-radius: 6px; padding: 20px 24px;
@@ -163,7 +147,6 @@
       border: 1px solid #e8e4de; transition: all 0.4s ease;
     }
     .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.08); border-color: var(--sage-light); }
-    .service-card-img { aspect-ratio: 16/10; }
     .service-card-body { padding: 24px 24px 28px; }
 
     /* ─── GALLERY ─── */
@@ -172,54 +155,29 @@
     .ba-badge {
       position: absolute; top: 12px; left: 12px; color: white;
       font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; padding: 5px 12px; border-radius: 3px;
+      text-transform: uppercase; padding: 5px 12px; border-radius: 3px; z-index: 2;
     }
     .ba-before { background: var(--charcoal); }
     .ba-after { background: var(--sage); }
 
     /* ─── TESTIMONIALS ─── */
-    .testimonials {
-      padding: 100px 24px;
-      background: linear-gradient(145deg, var(--charcoal), #2A2A2A);
-      color: white;
-    }
-    .testimonial-slide {
-      position: absolute; top: 0; left: 0; right: 0;
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      pointer-events: none;
-    }
-    .testimonial-slide.active {
-      position: relative; opacity: 1;
-      transform: translateY(0); pointer-events: auto;
-    }
+    .testimonials { padding: 100px 24px; background: linear-gradient(145deg, var(--charcoal), #2A2A2A); color: white; }
+    .testimonial-slide { position: absolute; top: 0; left: 0; right: 0; opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; pointer-events: none; }
+    .testimonial-slide.active { position: relative; opacity: 1; transform: translateY(0); pointer-events: auto; }
     .testimonial-quote-mark { font-family: var(--font-heading); font-size: 48px; color: var(--gold); margin-bottom: 8px; }
     .testimonial-text { font-size: 18px; line-height: 1.8; font-style: italic; color: #d4d4d4; margin-bottom: 24px; }
     .testimonial-name { font-family: var(--font-heading); font-size: 16px; font-weight: 600; color: white; }
     .testimonial-role { font-size: 13px; color: var(--sage-light); }
     .testimonial-dots { display: flex; gap: 10px; justify-content: center; margin-top: 32px; }
-    .testimonial-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.5); background: transparent;
-      cursor: pointer; transition: all 0.3s;
-    }
+    .testimonial-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); background: transparent; cursor: pointer; transition: all 0.3s; }
     .testimonial-dot.active { background: var(--gold); border-color: var(--gold); }
 
     /* ─── PACKAGES ─── */
     .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .pkg-card {
-      background: white; padding: 40px 32px; border-radius: 6px;
-      border: 1px solid #e8e4de; transition: all 0.4s ease;
-      position: relative; overflow: hidden;
-    }
+    .pkg-card { background: white; padding: 40px 32px; border-radius: 6px; border: 1px solid #e8e4de; transition: all 0.4s ease; position: relative; overflow: hidden; }
     .pkg-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
     .pkg-popular { border-color: var(--sage); box-shadow: 0 8px 32px rgba(107,126,92,0.15); }
-    .pkg-badge {
-      position: absolute; top: 0; left: 0; right: 0;
-      background: var(--sage); color: white; text-align: center;
-      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-      font-weight: 600; padding: 6px 0;
-    }
+    .pkg-badge { position: absolute; top: 0; left: 0; right: 0; background: var(--sage); color: white; text-align: center; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; padding: 6px 0; }
     .pkg-name { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
     .pkg-price { font-family: var(--font-heading); font-size: 28px; font-weight: 700; color: var(--sage); margin-bottom: 24px; }
     .pkg-feature { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--charcoal-light); margin-bottom: 12px; }
@@ -230,20 +188,16 @@
     .step-circle {
       width: 140px; height: 140px; border-radius: 50%; overflow: hidden;
       margin: 0 auto 20px; border: 3px solid var(--sage-light);
+      background: linear-gradient(145deg, var(--sage-pale), var(--cream-dark));
+      display: flex; align-items: center; justify-content: center;
     }
+    .step-circle .ph-icon { font-size: 36px; opacity: 0.5; margin-bottom: 0; }
     .step-num { font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: rgba(139,158,124,0.19); margin-bottom: 8px; }
     .step-title { font-family: var(--font-heading); font-size: 17px; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; }
 
     /* ─── CONTACT ─── */
-    .contact {
-      padding: 100px 24px;
-      background: linear-gradient(145deg, var(--sage), var(--sage-dark));
-      color: white;
-    }
-    .contact-box {
-      background: rgba(255,255,255,0.12); border-radius: 8px;
-      padding: 40px; border: 1px solid rgba(255,255,255,0.15);
-    }
+    .contact { padding: 100px 24px; background: linear-gradient(145deg, var(--sage), var(--sage-dark)); color: white; }
+    .contact-box { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 40px; border: 1px solid rgba(255,255,255,0.15); }
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 24px; }
     .contact-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
     .contact-value { font-family: var(--font-heading); font-size: 18px; }
@@ -264,7 +218,6 @@
       .nav-links { display: none !important; }
       .hamburger { display: block; }
       .hero-grid { grid-template-columns: 1fr !important; text-align: center; gap: 40px !important; }
-      .hero-grid .hero-left { align-items: center; }
       .hero-btns { justify-content: center; }
       .about-grid { grid-template-columns: 1fr !important; }
       .services-grid { grid-template-columns: 1fr !important; }
@@ -311,7 +264,7 @@
     <div class="hero-orb-1"></div>
     <div class="hero-orb-2"></div>
     <div class="container hero-grid">
-      <div class="hero-left">
+      <div>
         <div class="reveal">
           <div class="gold-line"></div>
           <h1 class="heading-xl" style="margin-bottom:24px;">Simplifying life's<br><span class="text-sage text-italic">biggest transitions.</span></h1>
@@ -326,15 +279,15 @@
       </div>
       <div class="reveal reveal-d2">
         <div class="hero-photos">
-          <div class="photo-wrap hero-photo-tall">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=800&fit=crop" alt="Organized kitchen">
+          <div class="img-placeholder" style="aspect-ratio:3/4; border-radius:8px;">
+            <div class="ph-icon">🍳</div><div class="ph-label">Organized Kitchen</div>
           </div>
           <div class="hero-photos-right">
-            <div class="photo-wrap hero-photo-sq">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=500&fit=crop" alt="Organized closet">
+            <div class="img-placeholder" style="aspect-ratio:1/1; border-radius:8px;">
+              <div class="ph-icon">👕</div><div class="ph-label">Before & After Closet</div>
             </div>
-            <div class="photo-wrap hero-photo-sq">
-              <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=500&h=500&fit=crop" alt="Walk-in ready bedroom">
+            <div class="img-placeholder" style="aspect-ratio:1/1; border-radius:8px;">
+              <div class="ph-icon">🛏️</div><div class="ph-label">Walk-In Ready Bedroom</div>
             </div>
           </div>
         </div>
@@ -347,6 +300,7 @@
     <div class="container-sm about-grid">
       <div class="reveal">
         <div style="position:relative;">
+          <!-- Jordan's REAL photo -->
           <div class="photo-wrap" style="aspect-ratio:3/4; border-radius:8px;">
             <img src="jordan.jpg" alt="Jordan Kraus, Founder of Next Chapter Downsizing & Design" style="object-position: top center;">
           </div>
@@ -372,26 +326,10 @@
   <!-- ═══ VALUES ═══ -->
   <section class="values">
     <div class="container-sm values-grid">
-      <div>
-        <div class="values-icon">🤝</div>
-        <div class="values-title">Compassion First</div>
-        <div class="values-desc">We never rush you. Every decision is yours.</div>
-      </div>
-      <div>
-        <div class="values-icon">📋</div>
-        <div class="values-title">Full-Service</div>
-        <div class="values-desc">From sorting to settling in — we handle it all.</div>
-      </div>
-      <div>
-        <div class="values-icon">🏠</div>
-        <div class="values-title">Local Expertise</div>
-        <div class="values-desc">Deep roots in the Edmonton community.</div>
-      </div>
-      <div>
-        <div class="values-icon">💛</div>
-        <div class="values-title">Trusted Referrals</div>
-        <div class="values-desc">Recommended by realtors and families alike.</div>
-      </div>
+      <div><div class="values-icon">🤝</div><div class="values-title">Compassion First</div><div class="values-desc">We never rush you. Every decision is yours.</div></div>
+      <div><div class="values-icon">📋</div><div class="values-title">Full-Service</div><div class="values-desc">From sorting to settling in — we handle it all.</div></div>
+      <div><div class="values-icon">🏠</div><div class="values-title">Local Expertise</div><div class="values-desc">Deep roots in the Edmonton community.</div></div>
+      <div><div class="values-icon">💛</div><div class="values-title">Trusted Referrals</div><div class="values-desc">Recommended by realtors and families alike.</div></div>
     </div>
   </section>
 
@@ -405,27 +343,27 @@
       </div>
       <div class="services-grid">
         <div class="reveal service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=375&fit=crop" alt="Downsizing"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">📦</div><div class="ph-label">Downsizing Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">Downsizing & Organizing</h3><p class="body-sm">Thoughtful sorting, categorizing, and decision support to help you keep what matters and let go of what doesn't.</p></div>
         </div>
         <div class="reveal reveal-d1 service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&h=375&fit=crop" alt="Estate Clean-Up"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">🏡</div><div class="ph-label">Estate Clean-Up Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">Estate Clean-Up</h3><p class="body-sm">Compassionate sorting, family item coordination, donations, junk removal, and sale of valuables after a loss or major move.</p></div>
         </div>
         <div class="reveal reveal-d2 service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=600&h=375&fit=crop" alt="Move Management"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">🚚</div><div class="ph-label">Move Management Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">Move Management</h3><p class="body-sm">Full-service packing, mover coordination, move-day oversight, unpacking, and organizing — so you never feel alone.</p></div>
         </div>
         <div class="reveal reveal-d3 service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=375&fit=crop" alt="New Home Setup"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">🛋️</div><div class="ph-label">New Home Setup Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">New Home Setup</h3><p class="body-sm">Walk into a home that's ready to live in — kitchen organized, beds made, closets set up, and art on the walls.</p></div>
         </div>
         <div class="reveal reveal-d4 service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=375&fit=crop" alt="Pre-Listing Prep"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">🏠</div><div class="ph-label">Pre-Listing Prep Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">Pre-Listing Prep</h3><p class="body-sm">Declutter and stage your home for sale so it shows beautifully and sells faster.</p></div>
         </div>
         <div class="reveal reveal-d5 service-card">
-          <div class="service-card-img photo-wrap"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=375&fit=crop" alt="Full Home Transition"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/10; border-radius:0; border:none; border-bottom:1px solid var(--sage-light);"><div class="ph-icon">✨</div><div class="ph-label">Full Transition Photo</div></div>
           <div class="service-card-body"><h3 class="heading-md" style="margin-bottom:10px;">Full Home Transition</h3><p class="body-sm">Our most comprehensive package: downsizing, packing, moving, unpacking, and complete home setup — start to finish.</p></div>
         </div>
       </div>
@@ -441,20 +379,20 @@
         <p class="body-text" style="max-width:520px; margin:0 auto; text-align:center;">Every project tells a story. Here's a glimpse of the transformations we create for Edmonton families.</p>
       </div>
       <div class="gallery-grid">
-        <div class="reveal photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=450&fit=crop" alt="Closet Organization"></div>
-        <div class="reveal reveal-d1 photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=600&h=450&fit=crop" alt="Storage Solutions"></div>
-        <div class="reveal reveal-d2 photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=450&fit=crop" alt="Kitchen Organization"></div>
-        <div class="reveal reveal-d3 photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=600&h=450&fit=crop" alt="Labelled Moving Boxes"></div>
-        <div class="reveal reveal-d4 photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&h=450&fit=crop" alt="Walk-In Ready Bedroom"></div>
-        <div class="reveal reveal-d5 photo-wrap" style="aspect-ratio:4/3; border-radius:6px;"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600&h=450&fit=crop" alt="Art and Finishing Touches"></div>
+        <div class="reveal img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">👕</div><div class="ph-label">Closet Organization</div></div>
+        <div class="reveal reveal-d1 img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">📦</div><div class="ph-label">Storage Solutions</div></div>
+        <div class="reveal reveal-d2 img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">🍳</div><div class="ph-label">Kitchen Organization</div></div>
+        <div class="reveal reveal-d3 img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">📦</div><div class="ph-label">Labelled Moving Boxes</div></div>
+        <div class="reveal reveal-d4 img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">🛏️</div><div class="ph-label">Walk-In Ready Bedroom</div></div>
+        <div class="reveal reveal-d5 img-placeholder" style="aspect-ratio:4/3;"><div class="ph-icon">🖼️</div><div class="ph-label">Art & Finishing Touches</div></div>
       </div>
       <div class="reveal ba-grid">
         <div style="position:relative;">
-          <div class="photo-wrap" style="aspect-ratio:16/9; border-radius:6px;"><img src="https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&h=450&fit=crop" alt="Before"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/9;"><div class="ph-icon">🏚️</div><div class="ph-label">Before Photo</div></div>
           <span class="ba-badge ba-before">Before</span>
         </div>
         <div style="position:relative;">
-          <div class="photo-wrap" style="aspect-ratio:16/9; border-radius:6px;"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=450&fit=crop" alt="After"></div>
+          <div class="img-placeholder" style="aspect-ratio:16/9;"><div class="ph-icon">✨</div><div class="ph-label">After Photo</div></div>
           <span class="ba-badge ba-after">After</span>
         </div>
       </div>
@@ -505,7 +443,6 @@
         <p class="body-text" style="max-width:480px; margin:0 auto; text-align:center;">Clear, transparent pricing. Every project begins with a free in-home consultation so we can tailor the plan to your needs.</p>
       </div>
       <div class="pkg-grid">
-        <!-- Downsizing Support -->
         <div class="reveal pkg-card">
           <div class="pkg-name">Downsizing Support</div>
           <div class="pkg-price">From $1,800</div>
@@ -515,7 +452,6 @@
           <div class="pkg-feature" style="margin-bottom:32px;"><span class="pkg-check">✓</span> Disposal management</div>
           <a href="#contact" class="btn-outline" style="display:block; text-align:center; width:100%;">Get Started</a>
         </div>
-        <!-- Move Management -->
         <div class="reveal reveal-d1 pkg-card">
           <div class="pkg-name">Move Management</div>
           <div class="pkg-price">From $2,500</div>
@@ -525,7 +461,6 @@
           <div class="pkg-feature" style="margin-bottom:32px;"><span class="pkg-check">✓</span> Unpacking essentials</div>
           <a href="#contact" class="btn-outline" style="display:block; text-align:center; width:100%;">Get Started</a>
         </div>
-        <!-- Full Home Transition -->
         <div class="reveal reveal-d2 pkg-card pkg-popular">
           <div class="pkg-badge">Most Popular</div>
           <div style="padding-top:16px;">
@@ -551,25 +486,25 @@
       </div>
       <div class="steps-grid">
         <div class="reveal text-center">
-          <div class="step-circle"><img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=300&h=300&fit=crop" alt="Consultation"></div>
+          <div class="step-circle"><div class="ph-icon">☕</div></div>
           <div class="step-num">01</div>
           <h3 class="step-title">Free Consultation</h3>
           <p class="body-sm">We visit your home, listen to your story, and understand your goals.</p>
         </div>
         <div class="reveal reveal-d1 text-center">
-          <div class="step-circle"><img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=300&h=300&fit=crop" alt="Planning"></div>
+          <div class="step-circle"><div class="ph-icon">📋</div></div>
           <div class="step-num">02</div>
           <h3 class="step-title">Custom Plan</h3>
           <p class="body-sm">You receive a clear proposal with scope, timeline, and transparent pricing.</p>
         </div>
         <div class="reveal reveal-d2 text-center">
-          <div class="step-circle"><img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=300&h=300&fit=crop" alt="Working"></div>
+          <div class="step-circle"><div class="ph-icon">📦</div></div>
           <div class="step-num">03</div>
           <h3 class="step-title">We Get to Work</h3>
           <p class="body-sm">Our team handles everything — sorting, packing, coordinating, and moving.</p>
         </div>
         <div class="reveal reveal-d3 text-center">
-          <div class="step-circle"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=300&h=300&fit=crop" alt="Relax"></div>
+          <div class="step-circle"><div class="ph-icon">🏡</div></div>
           <div class="step-num">04</div>
           <h3 class="step-title">Walk In & Relax</h3>
           <p class="body-sm">Your new home is set up, organized, and ready for you to enjoy.</p>
@@ -588,17 +523,11 @@
       </div>
       <div class="reveal reveal-d2 contact-box">
         <div class="contact-grid">
-          <div>
-            <div class="contact-label">Phone</div>
-            <div class="contact-value">(780) 555-0147</div>
-          </div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddb5b8b1b1b29db3b8a5a9beb5bcada9b8afa4a4bef3bebc">[email&#160;protected]</a></div>
-          </div>
+          <div><div class="contact-label">Phone</div><div class="contact-value">(780) 555-0147</div></div>
+          <div><div class="contact-label">Email</div><div class="contact-value">hello@nextchapteryyc.ca</div></div>
         </div>
         <div style="font-size:14px; opacity:0.8; margin-bottom:24px; text-align:center;">Serving Edmonton, St. Albert, Sherwood Park, and surrounding areas.</div>
-        <a href="/cdn-cgi/l/email-protection#48202d24242708262d303c2b2029383c2d3a31312b662b29773b3d2a222d2b3c750e3a2d2d6d7a780b27263b3d243c293c2127266d7a781a2d393d2d3b3c" class="btn-primary btn-white">Request Your Free Consultation</a>
+        <a href="mailto:hello@nextchapteryyc.ca?subject=Free%20Consultation%20Request" class="btn-primary btn-white">Request Your Free Consultation</a>
       </div>
     </div>
   </section>
@@ -614,50 +543,50 @@
       <div>
         <div class="footer-col-title">Services</div>
         <div class="footer-col-links">
-          <span>Downsizing & Organizing</span>
-          <span>Estate Clean-Up</span>
-          <span>Move Management</span>
-          <span>New Home Setup</span>
-          <span>Pre-Listing Prep</span>
+          <span>Downsizing & Organizing</span><span>Estate Clean-Up</span><span>Move Management</span><span>New Home Setup</span><span>Pre-Listing Prep</span>
         </div>
       </div>
       <div>
         <div class="footer-col-title">Connect</div>
         <div class="footer-col-links">
-          <span>Instagram: @nextchapteryyc</span>
-          <span>Facebook: /nextchapteryyc</span>
-          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="28404d44444768464d505c4b4049585c4d5a51514b064b49">[email&#160;protected]</a></span>
-          <span>(780) 555-0147</span>
+          <span>Instagram: @nextchapteryyc</span><span>Facebook: /nextchapteryyc</span><span>hello@nextchapteryyc.ca</span><span>(780) 555-0147</span>
         </div>
       </div>
     </div>
     <div class="footer-bottom">© 2026 Next Chapter Downsizing & Design. All rights reserved. Edmonton, Alberta.</div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ─── Scroll Reveal ───
+  <script>
+    // Scroll Reveal
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ─── Sticky Nav ───
+    // Sticky Nav
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     }, { passive: true });
 
-    // ─── Mobile Menu ───
+    // Mobile Menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-    // ─── Testimonial Carousel ───
+    // Testimonial Carousel
     let currentSlide = 0;
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.testimonial-dot');
-
     function showSlide(index) {
-      slides.
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentSlide = index;
+    }
+    dots.forEach(dot => { dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.index))); });
+    setInterval(() => showSlide((currentSlide + 1) % slides.length), 6000);
+  </script>
+</body>
+</html>
